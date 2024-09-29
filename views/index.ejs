@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safar</title>
+    <link rel="stylesheet" href="code.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="icon-menu">
+                <div class="icon"><img src="search-interface-symbol.png" alt="Search"></div>
+                <div class="icon"> <a href="post"><img src="plus.png" alt="Post"></a></div>
+                <div class="icon"><img src="send.png" alt="DM"></div>
+                <div class="icon">
+                    <a href="profile"><img src="user.png" alt="Profile"></a>
+                </div>
+                <div class="icon">
+                    <a href="index"><img src="home.png" alt="Home"></a>
+                </div>
+                <div class="icon" onclick="togglePlacesSidebar()">
+                    <img src="follow-us.png" alt="Places">
+                </div>
+                <div class="icon">
+                    <a href="settingspage"><img src="settings.png" alt="Settings"></a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <header>
+                <div class="menu-button" onclick="toggleMenu()">&#9776;</div>
+                <h1 class="site-title">Safar</h1>
+                <input type="text" class="mainsearch-bar" placeholder="Search...">
+            </header>
+
+            <!-- Post Sections -->
+            <% posts.forEach(function(post) { %>
+                <div class="post">
+                    <div class="post-image">
+                        <img src="<%= post.image %>" alt="<%= post.alt %>">
+                    </div>
+                    <div class="post-info">
+                        <div class="post-pfp"><img src="pfp.jpg" alt="User Profile"></div>
+                        <div class="post-details">
+                            <h2 class="post-name"><%= post.userName %></h2>
+                            <p class="post-caption"><%= post.caption %></p>
+                            <div class="post-rating">
+                                <span>&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-section">
+                        <% post.comments.forEach(function(comment) { %>
+                            <div class="comment">
+                                <p><strong><%= comment.user %>:</strong> <%= comment.text %></p>
+                            </div>
+                        <% }) %>
+                        <button class="see-more" onclick="toggleComments(this)">See more</button>
+                        <div class="additional-comments" style="display: none;">
+                            <% post.additionalComments.forEach(function(additionalComment) { %>
+                                <div class="comment">
+                                    <p><strong><%= additionalComment.user %>:</strong> <%= additionalComment.text %></p>
+                                </div>
+                            <% }) %>
+                        </div>
+                        <textarea placeholder="Add a comment..." rows="2"></textarea>
+                        <button class="post-comment">Post</button>
+                    </div>
+                </div>
+            <% }) %>
+
+        </div>
+    </div>
+    <div class="sidebar-places" id="sidebar-places">
+        <header class="chatroom-header">
+            <img src="chatroomicon.png" alt="Chat Icon" class="chat-icon">
+            <h2 class="chatroom-title">CHATROOM</h2>
+        </header>
+        <input type="text" class="search-bar" placeholder="SEARCH TO ENTER CHATROOMS">
+        <div class="places-list" id="places-list">
+           <!-- Add dynamic content here -->
+        </div>
+    </div>        
+</div>
+
+    
+    <style>
+        /* CSS remains the same */
+    </style>
+    <script src="script.js"></script>
+</body>
+</html>
